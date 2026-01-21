@@ -1,0 +1,430 @@
+/* Smart Agricultural System - Dashboard Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #27ae60;
+    --secondary-color: #3498db;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --dark-bg: #2c3e50;
+    --light-bg: #ecf0f1;
+    --card-bg: #ffffff;
+    --text-dark: #2c3e50;
+    --text-light: #7f8c8d;
+    --border-color: #bdc3c7;
+    --success-color: #2ecc71;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--text-dark);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+header {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: var(--text-light);
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.connection-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--light-bg);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.status-dot.online {
+    background: var(--success-color);
+}
+
+.status-dot.offline {
+    background: var(--danger-color);
+    animation: none;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Configuration Panel */
+.config-panel {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.config-panel h2 {
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+.config-form {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 15px;
+    align-items: center;
+}
+
+.config-form label {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.config-form input,
+.config-form select {
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.config-form input:focus,
+.config-form select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #229954;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+}
+
+.btn-success {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+}
+
+.btn-secondary {
+    background: var(--text-light);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6c7d;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Sensor Grid */
+.sensor-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.sensor-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px;
+    background: var(--light-bg);
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+.sensor-item:hover {
+    background: #d5dbdb;
+}
+
+.sensor-label {
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+
+.sensor-value {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.sensor-status {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.sensor-status:contains("YES"),
+.sensor-status:contains("ON"),
+.sensor-status:contains("DETECTED") {
+    background: var(--success-color);
+    color: white;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: var(--border-color);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+    transition: width 0.5s ease;
+    border-radius: 5px;
+}
+
+/* Alert Box */
+.alert-box {
+    background: var(--danger-color) !important;
+    color: white;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    animation: alertPulse 1s infinite;
+}
+
+.alert-icon {
+    font-size: 2em;
+}
+
+.alert-text {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+@keyframes alertPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Camera Section */
+.camera-section {
+    grid-column: span 2;
+}
+
+.camera-container {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 400px;
+}
+
+.camera-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.camera-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2em;
+}
+
+.camera-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.camera-controls button {
+    flex: 1;
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    gap: 10px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: var(--light-bg);
+    border-radius: 8px;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.info-value {
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+/* Serial Monitor */
+.serial-monitor {
+    background: #1e1e1e;
+    color: #00ff00;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.log-entry {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+.log-entry.error {
+    color: #ff6b6b;
+}
+
+.log-entry.warning {
+    color: #ffa500;
+}
+
+.log-entry.info {
+    color: #4dabf7;
+}
+
+/* Scrollbar */
+.serial-monitor::-webkit-scrollbar {
+    width: 8px;
+}
+
+.serial-monitor::-webkit-scrollbar-track {
+    background: #2c2c2c;
+    border-radius: 10px;
+}
+
+.serial-monitor::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 10px;
+}
+
+.serial-monitor::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .config-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .camera-section {
+        grid-column: span 1;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+    }
+}
