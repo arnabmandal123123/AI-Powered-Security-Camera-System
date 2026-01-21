@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Agricultural System - Monitoring Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🌾 Smart Agricultural System</h1>
+            <p class="subtitle">Real-time Sensor Monitoring Dashboard</p>
+            <div class="connection-status" id="connectionStatus">
+                <span id="statusDot" class="status-dot offline"></span>
+                <span id="statusText">Disconnected</span>
+            </div>
+        </header>
+
+        <!-- Configuration Panel -->
+        <section class="config-panel">
+            <h2>⚙️ Configuration</h2>
+            <div class="config-form">
+                <label for="serialPort">Serial Port:</label>
+                <select id="serialPort">
+                    <option value="">Select Arduino Port</option>
+                </select>
+                <button id="connectBtn" class="btn btn-primary">Connect Arduino</button>
+                
+                <label for="cameraIP">ESP32-CAM IP:</label>
+                <input type="text" id="cameraIP" placeholder="192.168.1.100" value="192.168.1.100">
+                <button id="connectCamBtn" class="btn btn-success">Connect Camera</button>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Soil & Environmental Section -->
+            <section class="card">
+                <h2>🌱 Soil & Environmental</h2>
+                <div class="sensor-grid">
+                    <div class="sensor-item">
+                        <span class="sensor-label">Soil Moisture</span>
+                        <span class="sensor-value" id="soilMoisture">-- %</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="moistureBar"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="sensor-item">
+                        <span class="sensor-label">Soil Temperature</span>
+                        <span class="sensor-value" id="soilTemp">-- °C</span>
+                    </div>
+                    
+                    <div class="sensor-item">
+                        <span class="sensor-label">Air Temperature</span>
+                        <span class="sensor-value" id="airTemp">-- °C</span>
+                    </div>
+                    
+                    <div class="sensor-item">
+                        <span class="sensor-label">Air Humidity</span>
+                        <span class="sensor-value" id="airHumidity">-- %</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="humidityBar"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="sensor-item">
+                        <span class="sensor-label">Light Level</span>
+                        <span class="sensor-value" id="lightLevel">--</span>
+                        <span class="sensor-status" id="lightStatus">Unknown</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Water Management Section -->
+            <section class="card">
+                <h2>💧 Water Management</h2>
+                <div class="sensor-grid">
+                    <div class="sensor-item">
+                        <span class="sensor-label">TDS (Nutrients)</span>
+                        <span class="sensor-value" id="tds">-- ppm</span>
+                    </div>
+                    
+                    <div class="sensor-item">
+                        <span class="sensor-label">Water Flow</span>
+                        <span class="sensor-value" id="flowRate">-- L/min</span>
+                    </div>
+                    
+                    <div class="sensor-item">
+                        <span class="sensor-label">Runoff Detected</span>
+                        <span class="sensor-status" id="runoffStatus">NO</span>
+                    </div>
+                    
+                    <div class="sensor-item">
+                        <span class="sensor-label">Pump Status</span>
+                        <span class="sensor-status" id="pumpStatus">OFF</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Section -->
+            <section class="card">
+                <h2>🔒 Security System</h2>
+                <div class="sensor-grid">
+                    <div class="sensor-item">
+                        <span class="sensor-label">PIR Motion</span>
+                        <span class="sensor-status" id="pirStatus">None</span>
+                    </div>
+                    
+                    <div class="sensor-item">
+                        <span class="sensor-label">Distance</span>
+                        <span class="sensor-value" id="distance">-- cm</span>
+                    </div>
+                    
+                    <div class="sensor-item alert-box" id="intrusionAlert" style="display: none;">
+                        <span class="alert-icon">⚠️</span>
+                        <span class="alert-text">INTRUSION DETECTED!</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Camera Feed Section -->
+            <section class="card camera-section">
+                <h2>📷 Camera Feed</h2>
+                <div class="camera-container">
+                    <img id="cameraFeed" src="" alt="Camera feed will appear here">
+                    <div class="camera-overlay" id="cameraOverlay">
+                        <p>Camera not connected</p>
+                    </div>
+                </div>
+                <div class="camera-controls">
+                    <button id="captureBtn" class="btn btn-secondary">Capture Image</button>
+                    <button id="streamBtn" class="btn btn-secondary">Toggle Stream</button>
+                </div>
+            </section>
+
+            <!-- System Info Section -->
+            <section class="card">
+                <h2>📊 System Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Last Update:</span>
+                        <span class="info-value" id="lastUpdate">Never</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Data Rate:</span>
+                        <span class="info-value" id="dataRate">0 updates/min</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Uptime:</span>
+                        <span class="info-value" id="uptime">0s</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Serial Monitor Section -->
+            <section class="card full-width">
+                <h2>📟 Serial Monitor</h2>
+                <div class="serial-monitor" id="serialMonitor">
+                    <p class="log-entry">Waiting for connection...</p>
+                </div>
+                <button id="clearLogBtn" class="btn btn-secondary">Clear Log</button>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
