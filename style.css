@@ -1,4 +1,4 @@
-/* Smart Agricultural System - Dashboard Styles */
+/* Smart Security System - Modern Dashboard Styles */
 
 * {
     margin: 0;
@@ -7,46 +7,74 @@
 }
 
 :root {
-    --primary-color: #27ae60;
-    --secondary-color: #3498db;
-    --danger-color: #e74c3c;
-    --warning-color: #f39c12;
-    --dark-bg: #2c3e50;
-    --light-bg: #ecf0f1;
-    --card-bg: #ffffff;
-    --text-dark: #2c3e50;
-    --text-light: #7f8c8d;
-    --border-color: #bdc3c7;
-    --success-color: #2ecc71;
+    --primary-color: #667eea;
+    --primary-light: #764ba2;
+    --secondary-color: #48bb78;
+    --danger-color: #fc5c65;
+    --warning-color: #f7b731;
+    --dark-bg: #0f0c29;
+    --card-bg: rgba(30, 30, 60, 0.7);
+    --text-primary: #ffffff;
+    --text-secondary: #a0aec0;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --glow: 0 0 20px rgba(102, 126, 234, 0.5);
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: var(--text-dark);
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    color: var(--text-primary);
     min-height: 100vh;
-    padding: 20px;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .container {
     max-width: 1400px;
     margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 /* Header */
 header {
-    background: var(--card-bg);
+    background: rgba(30, 30, 60, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
     margin-bottom: 30px;
     text-align: center;
+    border: 1px solid var(--border-color);
 }
 
 header h1 {
-    color: var(--primary-color);
-    font-size: 2.5em;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 3em;
     margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: -1px;
 }
 
 .subtitle {
@@ -185,8 +213,9 @@ header h1 {
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: var(--shadow), var(--glow);
+    border-color: rgba(102, 126, 234, 0.5);
 }
 
 .card h2 {
@@ -427,4 +456,436 @@ header h1 {
     header h1 {
         font-size: 1.8em;
     }
+}
+
+/* ===== SECURITY SYSTEM SPECIFIC STYLES ===== */
+
+/* Security Status Bar */
+.security-status-bar {
+    display: flex;
+    gap: 20px;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.security-status-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    min-width: 200px;
+    padding: 15px;
+    background: var(--light-bg);
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.security-status-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.security-status-item .status-icon {
+    font-size: 2.5em;
+}
+
+.security-status-item .status-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.security-status-item .status-label {
+    font-size: 0.85em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.security-status-item .status-value {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+/* Detection Canvas */
+#detectionCanvas {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #000;
+}
+
+.camera-container canvas {
+    display: block;
+    max-width: 100%;
+}
+
+.overlay-hint {
+    font-size: 0.9em;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+/* Detection Stats */
+.detection-stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    margin-top: 15px;
+    padding: 15px;
+    background: var(--light-bg);
+    border-radius: 10px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item .stat-label {
+    font-size: 0.85em;
+    color: var(--text-light);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.stat-item .stat-value {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Events Log */
+.events-log {
+    background: #1e1e1e;
+    color: #00ff00;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    height: 350px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.events-log .log-entry {
+    margin: 8px 0;
+    padding: 8px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.events-log .log-entry.info {
+    color: #4dabf7;
+    border-left-color: #4dabf7;
+}
+
+.events-log .log-entry.success {
+    color: #2ecc71;
+    border-left-color: #2ecc71;
+}
+
+.events-log .log-entry.warning {
+    color: #ffa500;
+    border-left-color: #ffa500;
+    background: rgba(255, 165, 0, 0.1);
+}
+
+.events-log .log-entry.alarm {
+    color: #ff6b6b;
+    border-left-color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.2);
+    font-weight: bold;
+    animation: logPulse 1s ease-in-out;
+}
+
+@keyframes logPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Snapshots Container */
+.snapshots-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    min-height: 150px;
+}
+
+.snapshot-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.snapshot-item:hover {
+    transform: scale(1.05);
+}
+
+.snapshot-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.snapshot-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.snapshot-time {
+    font-size: 0.75em;
+}
+
+.btn-small {
+    padding: 5px 10px;
+    font-size: 0.75em;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-small:hover {
+    background: #229954;
+}
+
+.placeholder-text {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-light);
+    padding: 40px;
+    font-size: 1.1em;
+}
+
+/* Alarm Button Styles */
+.btn-danger {
+    background: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+
+.btn-warning {
+    background: var(--warning-color);
+    color: white;
+}
+
+.btn-warning:hover {
+    background: #e67e22;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(243, 156, 18, 0.3);
+}
+
+/* Detection Confidence Indicators */
+.detection-box {
+    position: absolute;
+    border: 3px solid #ff0000;
+    background: rgba(255, 0, 0, 0.2);
+}
+
+.detection-label {
+    position: absolute;
+    background: #ff0000;
+    color: white;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Alarm Flash Animation */
+@keyframes alarmFlash {
+    0%, 100% {
+        background: var(--card-bg);
+    }
+    50% {
+        background: rgba(231, 76, 60, 0.3);
+    }
+}
+
+.alarm-active {
+    animation: alarmFlash 1s infinite;
+}
+
+/* Mobile Responsiveness for Security Features */
+@media (max-width: 768px) {
+    .security-status-bar {
+        flex-direction: column;
+    }
+    
+    .detection-stats {
+        flex-direction: column;
+    }
+    
+    .snapshots-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .camera-controls {
+        flex-direction: column;
+    }
+}
+
+/* Updated values animation */
+.updated {
+    animation: highlight 0.3s ease;
+}
+
+@keyframes highlight {
+    0%, 100% {
+        background: transparent;
+    }
+    50% {
+        background: rgba(39, 174, 96, 0.2);
+    }
+}
+
+/* Alert Banner */
+.alert-banner {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        top: -100px;
+        opacity: 0;
+    }
+    to {
+        top: 20px;
+        opacity: 1;
+    }
+}
+
+.alert-content {
+    background: linear-gradient(135deg, #fc5c65 0%, #eb3b5a 100%);
+    color: white;
+    padding: 25px 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(252, 92, 101, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 450px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    animation: pulse 2s infinite;
+    backdrop-filter: blur(10px);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 8px 32px rgba(231, 76, 60, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 48px rgba(231, 76, 60, 0.8);
+    }
+}
+
+.alert-icon {
+    font-size: 2em;
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+.alert-text {
+    flex: 1;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.alert-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.alert-close:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(90deg);
+}
+
+/* Alert Settings */
+.alert-settings {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(52, 73, 94, 0.3);
+    border-radius: 10px;
+    border: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.alert-objects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.object-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95em;
+    backdrop-filter: blur(5px);
+}
+
+.object-checkbox:hover {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.6);
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.object-checkbox input[type="checkbox"] {
+    cursor: pointer;
+    margin: 0;
+}
+
+.object-checkbox input[type="checkbox"]:checked + span {
+    color: #667eea;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
 }
