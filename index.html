@@ -5,89 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESP32-CAM Security System</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3"></script>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🔒 ESP32-CAM Security System</h1>
-            <p class="subtitle">AI-Powered Object Detection & Monitoring</p>
+            <div class="logo-section">
+                <span class="material-icons logo-icon">security</span>
+                <div>
+                    <h1>Security Camera</h1>
+                    <p class="subtitle">AI-Powered Object Detection & Monitoring</p>
+                </div>
+            </div>
         </header>
 
         <!-- Security Status Bar -->
         <div class="security-status-bar">
             <div class="status-item">
-                <span class="status-icon">📡</span>
-                <span class="status-label">Connection:</span>
-                <span id="connectionStatus" class="status-value">Disconnected</span>
+                <span class="material-icons status-icon">wifi</span>
+                <div class="status-content">
+                    <span class="status-label">Connection</span>
+                    <span id="connectionStatus" class="status-value">Disconnected</span>
+                </div>
             </div>
             <div class="status-item">
-                <span class="status-icon">🤖</span>
-                <span class="status-label">AI Detection:</span>
-                <span id="aiStatus" class="status-value">Inactive</span>
+                <span class="material-icons status-icon">psychology</span>
+                <div class="status-content">
+                    <span class="status-label">AI Detection</span>
+                    <span id="aiStatus" class="status-value">Inactive</span>
+                </div>
             </div>
             <div class="status-item">
-                <span class="status-icon">🚨</span>
-                <span class="status-label">Alarm:</span>
-                <span id="alarmStatus" class="status-value">Disabled</span>
+                <span class="material-icons status-icon">notifications</span>
+                <div class="status-content">
+                    <span class="status-label">Alarm</span>
+                    <span id="alarmStatus" class="status-value">Disabled</span>
+                </div>
             </div>
         </div>
 
         <!-- Alert Banner -->
         <div id="alertBanner" class="alert-banner hidden">
-            <span class="alert-icon">⚠️</span>
+            <span class="material-icons alert-icon">warning</span>
             <span id="alertMessage" class="alert-message"></span>
-            <button id="dismissAlertBtn" class="btn btn-small" style="margin-left: auto;">✕ Dismiss</button>
+            <button id="dismissAlertBtn" class="btn-icon" style="margin-left: auto;">
+                <span class="material-icons">close</span>
+            </button>
         </div>
 
         <!-- Connection Settings -->
         <div class="card">
-            <h2>📡 Camera Connection</h2>
+            <div class="card-header">
+                <span class="material-icons card-icon">router</span>
+                <h2>Camera Connection</h2>
+            </div>
             <div class="input-group">
-                <label for="esp32IP">ESP32-CAM IP Address:</label>
+                <label for="esp32IP">ESP32-CAM IP Address</label>
                 <input type="text" id="esp32IP" placeholder="192.168.1.35" value="">
             </div>
             <div class="button-group">
-                <button id="setIPBtn" class="btn btn-primary">Set IP Address</button>
-                <button id="testConnectionBtn" class="btn btn-secondary">Test Connection</button>
+                <button id="setIPBtn" class="btn btn-primary">
+                    <span class="material-icons">done</span>
+                    Set IP Address
+                </button>
+                <button id="testConnectionBtn" class="btn btn-secondary">
+                    <span class="material-icons">wifi_find</span>
+                    Test Connection
+                </button>
             </div>
         </div>
 
         <!-- Camera Feed -->
         <div class="card">
-            <h2>📹 Live Camera Feed</h2>
+            <div class="card-header">
+                <span class="material-icons card-icon">videocam</span>
+                <h2>Live Camera Feed</h2>
+            </div>
             <div class="camera-container">
                 <img id="cameraFeed" alt="ESP32-CAM Stream">
                 <canvas id="detectionCanvas"></canvas>
                 <div id="cameraPlaceholder" class="camera-placeholder">
-                    <p>📷 Camera feed will appear here</p>
+                    <span class="material-icons placeholder-icon">videocam_off</span>
+                    <p>Camera feed will appear here</p>
                     <p class="placeholder-hint">Set IP address and start streaming</p>
                 </div>
             </div>
             <div class="button-group">
-                <button id="startStreamBtn" class="btn btn-primary">▶ Start Stream</button>
-                <button id="stopStreamBtn" class="btn btn-secondary" disabled>⏹ Stop Stream</button>
-                <button id="captureBtn" class="btn btn-accent">📸 Capture Photo</button>
+                <button id="startStreamBtn" class="btn btn-primary">
+                    <span class="material-icons">play_arrow</span>
+                    Start Stream
+                </button>
+                <button id="stopStreamBtn" class="btn btn-secondary" disabled>
+                    <span class="material-icons">stop</span>
+                    Stop Stream
+                </button>
+                <button id="captureBtn" class="btn btn-accent">
+                    <span class="material-icons">photo_camera</span>
+                    Capture Photo
+                </button>
             </div>
         </div>
 
         <!-- AI Detection Controls -->
         <div class="card">
-            <h2>🤖 AI Object Detection</h2>
+            <div class="card-header">
+                <span class="material-icons card-icon">smart_toy</span>
+                <h2>AI Object Detection</h2>
+            </div>
             <div class="detection-info">
-                <p>Powered by TensorFlow.js COCO-SSD model</p>
-                <p class="info-text">Detects 80+ object classes in real-time</p>
+                <span class="material-icons info-icon">info</span>
+                <div>
+                    <p>Powered by TensorFlow.js COCO-SSD model</p>
+                    <p class="info-text">Detects 80+ object classes in real-time</p>
+                </div>
             </div>
             <div class="button-group">
-                <button id="enableDetectionBtn" class="btn btn-primary">🔍 Enable Detection</button>
-                <button id="disableDetectionBtn" class="btn btn-secondary" disabled>⏸ Disable Detection</button>
+                <button id="enableDetectionBtn" class="btn btn-primary">
+                    <span class="material-icons">visibility</span>
+                    Enable Detection
+                </button>
+                <button id="disableDetectionBtn" class="btn btn-secondary" disabled>
+                    <span class="material-icons">visibility_off</span>
+                    Disable Detection
+                </button>
             </div>
             
             <!-- Alert Trigger Settings -->
             <div class="alert-triggers">
-                <h3>🚨 Alert Triggers</h3>
-                <p class="info-text">Select objects that will trigger an alert when detected:</p>
+                <div class="section-header">
+                    <span class="material-icons">notifications_active</span>
+                    <h3>Alert Triggers</h3>
+                </div>
+                <p class="info-text">Select objects that will trigger an alert when detected</p>
                 <div class="trigger-grid">
                     <label class="object-checkbox">
                         <input type="checkbox" value="person" checked>
@@ -139,37 +193,64 @@
 
         <!-- Alarm Control -->
         <div class="card">
-            <h2>🚨 Alarm System</h2>
+            <div class="card-header">
+                <span class="material-icons card-icon">notification_important</span>
+                <h2>Alarm System</h2>
+            </div>
             <div class="button-group">
-                <button id="enableAlarmBtn" class="btn btn-danger">🔔 Enable Alarm</button>
-                <button id="disableAlarmBtn" class="btn btn-secondary" disabled>🔕 Disable Alarm</button>
+                <button id="enableAlarmBtn" class="btn btn-danger">
+                    <span class="material-icons">notifications_active</span>
+                    Enable Alarm
+                </button>
+                <button id="disableAlarmBtn" class="btn btn-secondary" disabled>
+                    <span class="material-icons">notifications_off</span>
+                    Disable Alarm
+                </button>
             </div>
         </div>
 
         <!-- Statistics & Detection Results -->
         <div class="stats-container">
             <div class="card stat-card">
-                <h3>📊 Detection Statistics</h3>
+                <div class="card-header">
+                    <span class="material-icons card-icon">analytics</span>
+                    <h3>Detection Statistics</h3>
+                </div>
                 <div class="stat-item">
-                    <span class="stat-label">Objects Detected:</span>
+                    <div class="stat-content">
+                        <span class="material-icons stat-icon">remove_red_eye</span>
+                        <span class="stat-label">Objects Detected</span>
+                    </div>
                     <span id="detectionCount" class="stat-value">0</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Alerts Triggered:</span>
+                    <div class="stat-content">
+                        <span class="material-icons stat-icon">warning</span>
+                        <span class="stat-label">Alerts Triggered</span>
+                    </div>
                     <span id="alertCount" class="stat-value">0</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Last Detection:</span>
+                    <div class="stat-content">
+                        <span class="material-icons stat-icon">schedule</span>
+                        <span class="stat-label">Last Detection</span>
+                    </div>
                     <span id="lastDetection" class="stat-value">None</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Detection Active:</span>
+                    <div class="stat-content">
+                        <span class="material-icons stat-icon">check_circle</span>
+                        <span class="stat-label">Detection Active</span>
+                    </div>
                     <span id="detectionActive" class="stat-value">No</span>
                 </div>
             </div>
 
             <div class="card">
-                <h3>📝 Event Log</h3>
+                <div class="card-header">
+                    <span class="material-icons card-icon">description</span>
+                    <h3>Event Log</h3>
+                </div>
                 <div id="eventLog" class="event-log">
                     <p class="log-entry info">System initialized and ready</p>
                 </div>
@@ -178,7 +259,10 @@
 
         <!-- Captured Snapshots -->
         <div class="card">
-            <h2>📸 Captured Snapshots</h2>
+            <div class="card-header">
+                <span class="material-icons card-icon">photo_library</span>
+                <h2>Captured Snapshots</h2>
+            </div>
             <div id="snapshotsContainer" class="snapshots-grid">
                 <p class="placeholder-text">No snapshots captured yet</p>
             </div>
